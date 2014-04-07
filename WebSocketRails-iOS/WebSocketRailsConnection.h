@@ -13,6 +13,7 @@
 @interface WebSocketRailsConnection : NSObject
 
 - (id)initWithUrl:(NSURL *)url dispatcher:(WebSocketRailsDispatcher *)dispatcher;
+- (id)initWithURLRequest:(NSURLRequest*)request dispatcher:(WebSocketRailsDispatcher *)dispatcher;
 
 - (void)trigger:(WebSocketRailsEvent *)event;
 - (void)flushQueue:(NSNumber *)id;

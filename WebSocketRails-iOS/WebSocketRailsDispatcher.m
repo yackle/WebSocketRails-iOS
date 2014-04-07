@@ -21,15 +21,21 @@
 
 - (id)initWithUrl:(NSURL *)url
 {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    return [self initWithURLRequest:request];
+}
+
+- (id)initWithURLRequest:(NSURLRequest*)request
+{
     self = [super init];
     if (self) {
-        _url = url;
+        _url = request.URL;
         _state = @"connecting";
         _channels = [NSMutableDictionary dictionary];
         _queue = [NSMutableDictionary dictionary];
         _callbacks = [NSMutableDictionary dictionary];
         
-        _connection = [WebSocketRailsConnection.alloc initWithUrl:url dispatcher:self];
+        _connection = [WebSocketRailsConnection.alloc initWithURLRequest:request dispatcher:self];
         _connectionId = @0;
     }
     return self;

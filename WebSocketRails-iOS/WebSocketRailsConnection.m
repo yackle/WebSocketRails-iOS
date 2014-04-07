@@ -22,13 +22,19 @@
 
 - (id)initWithUrl:(NSURL *)url dispatcher:(WebSocketRailsDispatcher *)dispatcher
 {
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+    return [self initWithURLRequest:request dispatcher:dispatcher];
+}
+
+- (id)initWithURLRequest:(NSURLRequest*)request dispatcher:(WebSocketRailsDispatcher *)dispatcher
+{
     self = [super init];
     if (self) {
-        _url = url;
+        _url = request.URL;
         _dispatcher = dispatcher;
         _message_queue = [NSMutableArray array];
         
-        _webSocket = [SRWebSocket.alloc initWithURL:_url];
+        _webSocket = [SRWebSocket.alloc initWithURLRequest:request];
         _webSocket.delegate = self;
         [_webSocket open];
     }

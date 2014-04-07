@@ -23,6 +23,7 @@
 @property (nonatomic, strong) NSNumber *connectionId;
 
 - (id)initWithUrl:(NSURL *)url;
+- (id)initWithURLRequest:(NSURLRequest*)request;
 
 - (void)dispatch:(WebSocketRailsEvent *)event;
 - (void)newMessage:(NSArray *)data;
