@@ -12,7 +12,7 @@
 @interface WebSocketRailsConnection() <SRWebSocketDelegate>
 
 @property (nonatomic, strong) NSURL *url;
-@property (nonatomic, strong) WebSocketRailsDispatcher *dispatcher;
+@property (nonatomic, weak) WebSocketRailsDispatcher *dispatcher;
 @property (nonatomic, strong) NSMutableArray *message_queue;
 @property (nonatomic, strong) SRWebSocket *webSocket;
 
@@ -61,6 +61,11 @@
 - (void)disconnect
 {
     [_webSocket close];
+}
+
+- (void)dealloc
+{
+    _webSocket.delegate = nil;
 }
 
 #pragma mark - SRWebSocketDelegate
